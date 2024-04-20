@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaotong.dao.IDruginfoDao">	
+	
+	<select id="selectList" resultType="druginfo">
+		select * from druginfo order by did
+	</select>
+	<select id="selectYp" resultType="druginfo" parameterType="string">
+		select * from druginfo where pcode like '%${value}%' or dname like '%${value}%'
+	</select>
+	<select id="selectOne" parameterType="string" resultType="druginfo">
+		select * from druginfo where did=#{did}
+	</select>
+	<insert id="insert" parameterType="druginfo">
+		insert into druginfo values (#{did},#{dname},#{dtype},#{unit},#{unitnum},#{minunit},#{price},#{provider},#{deadline},#{dstate},#{pcode},#{dnum},#{unitnum}||'*'||#{minunit}||'/'||#{unit})
+	</insert>
+	<update id="update" parameterType="druginfo">
+		update druginfo set dname = #{dname},dtype = #{dtype},unit = #{unit},unitnum = #{unitnum},minunit = #{minunit},price = #{price},provider = #{provider},deadline = #{deadline},dstate = #{dstate},pcode = #{pcode},dnum = #{dnum},bz = #{bz}
+		where did=#{did}
+	</update>
+	<update id="updateDnum" parameterType="hashmap">
+		update druginfo set dnum = dnum+#{dnum} where did=#{did}
+	</update>
+	<delete id="delete" parameterType="string">
+		delete from druginfo where did=#{did}
+	</delete>
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaotong.dao.IFeeinfoDao">	
+	
+	<select id="selectList" resultType="feeinfo">
+		select * from feeinfo
+	</select>
+	<select id="selectBytime" resultType="int">
+		select count(*) from feeinfo f where f.fid in(select fid from recipeinfo where sfstate=1 and zxstate=0 and rtype=3)
+	</select>
+	<select id="selectDfyList" resultType="feeinfo" parameterType="hashmap">
+		select f.*,s.idnumber,s.sex,s.age,r.diagnose from feeinfo f,register s,record r 
+		<where>
+		f.regid=s.regid and f.regid = r.regid(+) and f.fid in(select fid from recipeinfo where sfstate=1 and zxstate=0 and rtype=3)
+		<if test="pno!=null and pno!=''">
+			 and (ltrim(f.patientno,'0') = #{pno} or f.patientno=#{pno})
+		</if>
+		<if test="idno!=null and idno!=''">
+			 and s.idnumber = #{idno}
+		</if>
+		</where>
+		 order by f.regid
+	</select>
+	<select id="selectOne" parameterType="string" resultType="feeinfo">
+		
+	</select>
+	<insert id="insert" parameterType="feeinfo">
+		insert into feeinfo values (#{fid},#{patientno},#{regid},#{patientname},#{totalcost},#{feestate},#{paytime},#{operatorid},#{bz})
+	</insert>
+	<insert id="insertGh" parameterType="feeinfo">
+		insert into feeinfo 
+		(patientno,regid,patientname,operatorid ,fid,totalcost,feestate,paytime,bz)
+		select patientno,regid,patientname,operatorid, #{fid},#{totalcost},#{feestate},#{paytime},#{bz} 
+		from register where regid = #{regid}
+	</insert>
+	<update id="update" parameterType="feeinfo">
+		
+	</update>
+	<delete id="delete" parameterType="string">
+		delete from feeinfo where fid=#{fid}
+	</delete>
+</mapper>

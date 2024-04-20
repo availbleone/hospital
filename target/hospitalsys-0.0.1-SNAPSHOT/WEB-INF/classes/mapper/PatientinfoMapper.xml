@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaotong.dao.IPatientinfoDao">	
+	
+	<select id="selectList" resultType="patientinfo">
+		
+	</select>
+	<select id="selectOne" parameterType="string" resultType="patientinfo">
+		select * from patientinfo where ltrim(patientno,'0') = #{patientno} or patientno=#{patientno}
+	</select>
+	<select id="selectByIdnumber" parameterType="string" resultType="patientinfo">
+		select * from patientinfo where idnumber = #{idnumber}
+	</select>
+	<insert id="insert" parameterType="int">
+		insert into patientinfo select r.patientno ,r.idnumber ,r.patientname,r.sex,r.age,'','',''
+		from register r where r.regid =#{regid}
+	</insert>
+	<update id="update" parameterType="patientinfo">
+	</update>
+	<delete id="delete" parameterType="string">
+	</delete>
+</mapper>

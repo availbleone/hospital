@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Created-By: IntelliJ IDEA
+Built-By: lj
+Build-Jdk: Oracle OpenJDK version 1.8.0_321
+Implementation-Title: hospitalsys Maven Webapp
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.xiaotong
+Main-Class: ${start-class}
+

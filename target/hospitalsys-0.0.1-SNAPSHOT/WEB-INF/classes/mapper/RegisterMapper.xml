@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaotong.dao.IRegisterDao">	
+	
+	<select id="selectList" resultType="register">
+		select r.*,d.dname,a.aname from register r,dept d,admin a 
+		where r.deptid = d.deptid and r.aid=a.aid(+)
+		and substr(r.regdate,1,10)=to_char(sysdate,'yyyy-mm-dd')
+		order by r.regdate desc
+	</select>
+	<select id="selectDz" resultType="register" parameterType="string">
+		select * from register  
+		where state = 0 and aid=#{aid} and substr(regdate,1,10)=to_char(sysdate,'yyyy-mm-dd')
+		order by regdate
+	</select>
+	<select id="selectOne" parameterType="int" resultType="register">
+	</select>
+	<select id="selectSeq"  resultType="int">
+		select seq_register.nextval from dual
+	</select>
+	<select id="selectLast" resultType="register">
+		select r.*,d.dname,a.aname from register r,dept d,admin a 
+		where r.deptid = d.deptid and r.aid=a.aid(+)
+		and regid = (select max(regid) from register)
+	</select>
+	<insert id="insert" parameterType="register">
+		insert into register values(#{regid},
+		<if test="patientno!= null and patientno!=''" >
+        #{patientno}
+      	</if>
+		<if test="patientno == null or patientno==''" >
+        lpad(seq_patientinfo.nextval,15,'0')
+      	</if>
+		,#{idnumber},#{patientname},#{sex},#{age},to_char(sysdate,'yyyy-mm-dd hh24:mi:ss'),#{deptid},
+		#{aid},#{state},#{operatorid},#{bz})
+	</insert>
+	<update id="update" parameterType="register">
+	</update>
+	<update id="updateState" parameterType="int">
+		update register set state = 1 where regid=#{regid}
+	</update>
+	<delete id="delete" parameterType="int">
+	</delete>
+</mapper>

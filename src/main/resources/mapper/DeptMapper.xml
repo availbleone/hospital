@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaotong.dao.IDeptDao">	
+	
+	<select id="selectList" resultType="dept">
+		select * from dept
+	</select>
+	<select id="selectGh" resultType="dept">
+		select * from dept where dtype = 1
+	</select>
+	<select id="selectOne" parameterType="string" resultType="dept">
+		select * from dept where deptid=#{deptid}
+	</select>
+	<insert id="insert" parameterType="dept">
+		insert into dept values (#{deptid},#{dname},#{dtype},#{dloc},#{bz})
+	</insert>
+	<update id="update" parameterType="dept">
+		update dept set dname=#{dname},dtype=#{dtype},dloc=#{dloc},bz=#{bz}
+		where deptid=#{deptid}
+	</update>
+	<delete id="delete" parameterType="string">
+		delete from dept where deptid=#{deptid}
+	</delete>
+</mapper>

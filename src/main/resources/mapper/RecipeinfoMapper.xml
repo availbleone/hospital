@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaotong.dao.IRecipeinfoDao">	
+	
+	<select id="selectList" resultType="recipeinfo">
+		select * from recipeinfo
+	</select>
+	<select id="selectByFid" resultType="recipeinfo" parameterType="string">
+		select r.*,d.bz as guige,d.provider as minunit from recipeinfo r,druginfo d
+		where r.did=d.did and r.fid=#{fid} 
+		and r.sfstate=1 and r.zxstate=0 and r.rtype=3
+	</select>
+	<select id="selectByRegid" resultType="recipeinfo" parameterType="int">
+		select r.*,decode(rtype,1,'检查',2,'检验','药品')as minunit from recipeinfo r
+		where regid=#{regid} and r.zxstate=1 and r.rtype<![CDATA[<>]]>0 order by r.rtype 
+	</select>
+	<select id="selectDsfList" resultType="recipeinfo" parameterType="hashmap">
+		select r.*,s.idnumber,s.sex from recipeinfo r,register s 
+		<where>
+		r.regid=s.regid and r.sfstate=0
+		<if test="pno!=null and pno!=''">
+			 and (ltrim(r.patientno,'0') = #{pno} or r.patientno=#{pno})
+		</if>
+		<if test="idno!=null and idno!=''">
+			 and s.idnumber = #{idno}
+		</if>
+		<if test="pname!=null and pname!=''">
+			 and r.patientname like '%${pname}%'
+		</if>
+		</where>
+		 order by r.regid,r.rtype
+	</select>
+	<select id="selectSfList" resultType="recipeinfo">
+		select * from recipeinfo where rid in
+		<foreach item="rid" collection="array" open="(" separator="," close=")">
+			#{rid}
+		</foreach>
+	</select>
+	<select id="selectByProperty" resultType="recipeinfo" parameterType="hashmap">
+		select r.*,d.minunit,d.unit from recipeinfo r,druginfo d
+		<where>
+		r.did = d.did(+)
+		<if test="regid!=null">
+			 and r.regid=#{regid} 
+		</if>
+		<if test="rtype!=null">
+			and r.rtype=#{rtype} 
+		</if>
+			
+		</where>
+	</select>
+	<select id="selectOne" parameterType="string" resultType="recipeinfo">
+		
+	</select>
+	<insert id="insert" parameterType="recipeinfo">
+		insert into recipeinfo values (#{rid},#{patientno},#{regid},#{patientname},#{rtype},#{did},#{dname},#{unitprice},#{dnum},#{qty},#{freq},#{operatorid},#{operatetime},#{fid},#{sfstate},#{zxstate},#{flag},#{bz})
+	</insert>
+	<insert id="insertGh" parameterType="recipeinfo">
+		insert into recipeinfo
+		( patientno,regid,patientname,operatorid,rid,rtype,did, dname,  unitprice,   
+		dnum,qty, freq, operatetime,fid,sfstate,zxstate,flag,bz)
+		select patientno,regid,patientname, operatorid,#{rid}, #{rtype},
+		   #{did},#{dname}, #{unitprice},#{dnum},#{qty},#{freq},#{operatetime},
+		   #{fid},#{sfstate},#{zxstate},#{flag}, #{bz}
+		   from register  where regid=#{regid}
+	</insert>
+	<update id="update" parameterType="recipeinfo">
+		
+	</update>
+	<update id="updateZxState" parameterType="string">
+		update recipeinfo set zxstate=1 where fid=#{fid} and rtype=3
+	</update>
+	<update id="updateFid" parameterType="hashmap">
+		update recipeinfo set fid=#{fid},sfstate=1 where rid in
+		<foreach item="rid" collection="rid" open="(" separator="," close=")">
+			#{rid}
+		</foreach>
+	</update>
+	<delete id="delete" parameterType="string">
+		delete from recipeinfo where rid=#{rid}
+	</delete> 
+</mapper>

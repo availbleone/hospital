@@ -1,0 +1,68 @@
+@charset "utf-8";
+body{font-family:"微软雅黑";}
+ul,li,image,h1,h2,h3,h4,dl,dt,dd,p,span,a{padding:0; margin:0; list-style:none; border:0; font-family:"微软雅黑","Arial";}
+h1,h2,h3,h4{font-family:"微软雅黑"; border:0px; margin:0px; padding:0px; font-weight:normal;}
+.showbox{float: left;}
+#imgs { background:#eee;}
+#imgs img{ width:40px;height: 40px;}
+.showall{
+	width: 1240px;
+	margin: 0 auto;
+	margin-top: 15px;
+}
+.info{
+	width:530px;
+	height: 520px;
+	margin-left: 50px;
+	float: left;
+}
+.title{
+	margin-top: 20px;
+	padding-bottom: 10px;
+}
+.title h3{
+	color: #171717;
+	font-size: 28px;
+	font-weight:400;
+}
+.txt{
+	width: 520px;
+	margin-top: 15px;
+	overflow: hidden;
+	background: #f8f8f8;
+}
+.price{
+	display: block;
+	line-height: 100px;
+	color: #f73a3a;
+	font-size: 24px;
+	float: left;
+}
+.price span{
+	font-size: 36px;
+	color: #f73a3a;
+}
+.right{
+	float: right;
+	
+}
+.number{
+	float: left;
+	margin-top: 30px;
+	padding: 0px 10px;
+	border-right: #c0c0c0 solid 1px;
+	font-size: 18px;
+	text-align: center;
+	color: #808080;
+}
+
+.txt-h{
+	width: 400px;
+	overflow: hidden;
+}
+.tex-o{
+	font-size: 20px;
+	line-height: 50px;
+	padding-right: 20px;
+	color: #848484;
+}

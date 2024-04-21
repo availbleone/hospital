@@ -41,19 +41,15 @@ $(function(){
         <li class="active"><cite></cite><a href="<%=path %>/basedata/deptmain.jsp" target="rightFrame">科室维护</a><i></i></li>
         <li><cite></cite><a href="<%=path %>/basedata/rolemain.jsp" target="rightFrame">角色管理</a><i></i></li>
         <li><cite></cite><a href="<%=path %>/basedata/adminmain.jsp" target="rightFrame">人员管理</a><i></i></li>
-        <li><cite></cite><a href="<%=path %>/basedata/clinicitem.jsp" target="rightFrame">收费项目维护</a><i></i></li>
         <li><cite></cite><a href="<%=path %>/basedata/druginfo.jsp" target="rightFrame">药品耗材维护</a><i></i></li>
-       <!--  <li><cite></cite><a href="index.html" target="rightFrame">首页模版</a><i></i></li>
-        <li><cite></cite><a href="right.html" target="rightFrame">数据列表</a><i></i></li> -->
         </ul>    
     </dd>
     
     <dd>
     <div class="title">
-    <span><img src="images/leftico02.png" /></span>门诊收费</div>
+    <span><img src="images/leftico02.png" /></span>门诊管理</div>
     <ul class="menuson">
         <li><cite></cite><a href="<%=path %>/fee/register.jsp" target="rightFrame">挂号</a><i></i></li>
-        <li><cite></cite><a href="<%=path %>/fee/feemain.jsp" target="rightFrame">收费</a><i></i></li>
         </ul>     
     </dd>   
         

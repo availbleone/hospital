@@ -109,7 +109,7 @@ function save(flag){
 	if(flag==2){
 		url = pathhere+'/recipeinfo/insert';
 	}
-	$("#fm").form('submit',{
+	/*$("#fm").form('submit',{
 		url:url,
 		success:function(result){
 			if(result==1){
@@ -120,10 +120,10 @@ function save(flag){
 				$("#tt").datagrid("reload");
 				$("#jclist").datagrid("reload");
 			}else{
-				$.messager.alert('提示','操作失败！');
+				$.messager.alert('提示','操作失！');
 			}
 		}
-	})
+	})*/
 }
 //检查检验项目下拉组合框
 function xmlist(type){

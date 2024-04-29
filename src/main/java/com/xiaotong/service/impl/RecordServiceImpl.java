@@ -22,8 +22,6 @@ public class RecordServiceImpl implements IRecordService {
 	public void insert(Record r) {
 		// TODO Auto-generated method stub
 		rdao.insert(r);
-		//修改患者就诊状态为已诊
-		//irdao.updateState(r.getRegid());
 	}
 
 	

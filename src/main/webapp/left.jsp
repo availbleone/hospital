@@ -38,10 +38,8 @@ $(function(){
     <span><img src="<%=path %>/images/leftico01.png" /></span>基础数据维护
     </div>
     	<ul class="menuson">
-<%--        <li class="active"><cite></cite><a href="<%=path %>/basedata/deptmain.jsp" target="rightFrame">科室维护</a><i></i></li>--%>
         <li><cite></cite><a href="<%=path %>/basedata/rolemain.jsp" target="rightFrame">角色管理</a><i></i></li>
         <li><cite></cite><a href="<%=path %>/basedata/adminmain.jsp" target="rightFrame">人员管理</a><i></i></li>
-<%--        <li><cite></cite><a href="<%=path %>/basedata/druginfo.jsp" target="rightFrame">药品耗材维护</a><i></i></li>--%>
         </ul>    
     </dd>
         <dd><div class="title"><span><img src="images/leftico03.png" /></span>医生工作站</div>
@@ -55,16 +53,7 @@ $(function(){
     <ul class="menuson">
         <li><cite></cite><a href="<%=path %>/fee/register.jsp" target="rightFrame">挂号</a><i></i></li>
         </ul>     
-    </dd>   
-        
-
-    
-<%--    <dd><div class="title"><span><img src="images/leftico01.png" /></span>药房管理</div>--%>
-<%--    <ul class="menuson">--%>
-<%--        <li><cite></cite><a href="<%=path %>/drugstore/drugmain.jsp" target="rightFrame">发药窗口</a><i></i></li>--%>
-<%--    </ul>    --%>
-<%--    </dd>  --%>
-    
+    </dd>
     </dl>
 </body>
 </html>

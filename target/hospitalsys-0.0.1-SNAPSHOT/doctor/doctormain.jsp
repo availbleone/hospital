@@ -58,7 +58,7 @@
 			    <li><label>门诊处置</label><textarea id="measure" name="measure" cols="" rows="" s="" class="textinput"></textarea></li>
 			    <li>
 			    	<label>&nbsp;</label>
-			    	<input type="button" class="btn" value="确认保存" onclick="save(1)"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    	<input type="button" class="btn" value="确认保存" onclick="save(1)"/>
 			    	<input type="button" class="btn" value="清空" onclick="javascript:cleara()"/>
 			    </li>
 <input type="hidden" id="operatorid" name="operatorid" class="dfinput"/>
@@ -95,7 +95,7 @@
 		    	<li><label id="bzsm1"></label><input name="bz" id="bz" type="text" class="dfinput" /></li>
 		    	<li>
 			    	<label>&nbsp;</label><br>
-			    	<input type="button" class="btn" value="确认保存" onclick="save(2)"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    	<input type="button" class="btn" value="确认保存" onclick="save(2)"/>
 				    <input type="button" class="btn" value="清空" onclick="javascript:cleara()"/>
 				</li>
 		    	
@@ -116,7 +116,7 @@
 			    	<th field="dnum" width="15">数量</th>
 			    	<th field="bz" width="15">部位/样本</th>
 			    	<th field="operatetime" width="30">开立时间</th>
-			    	<th field="sfstate" width="10">是否交费</th>
+			    	<%--<th field="sfstate" width="10">是否交费</th>--%>
 			    	<th field="zxstate" width="10">是否执行</th>
 			    </tr>
 			    </thead>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>医生工作站</title>
 <%@ include file="/head.jsp" %>
 <script language="javascript">
 	$(function(){

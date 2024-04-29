@@ -206,12 +206,12 @@ function sex(value,row,index){
 <!-- 交费窗口 -->
 <div id="dlg" class="easyui-dialog" style="width: 360px; height: 300px; padding: 10px 20px;overflow: hidden;"
        data-options="closed:true,buttons:'#dlg-buttons',modal:true">
-      <span style="font-size: 20px">应收金额：</span><span style="color: red;font-size: 35px">￥10.00</span>
+      <%--<span style="font-size: 20px">应收金额：</span><span style="color: red;font-size: 35px">￥10.00</span>
       <div class="xline" style="margin-bottom: 10px"></div>
       <span style="font-size: 20px">实收金额：<input id="ss" class="easyui-textbox" style="width: 120px"/></span><br>
-      <span style="font-size: 20px">找零：</span><span id="zl" style="color: red;font-size: 20px"></span>
+      <span style="font-size: 20px">找零：</span><span id="zl" style="color: red;font-size: 20px"></span>--%>
       <div class="xline" style="margin-bottom: 10px"></div>
-      <a id="sf" class="easyui-linkbutton c8" href="javascript:insert()">收费</a>
+      <a id="sf" class="easyui-linkbutton c8" href="javascript:insert()">挂号</a>
       <a class="easyui-linkbutton c8" href="javascript:qx()">取消</a>
 </div>
 </body>

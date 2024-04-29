@@ -5,7 +5,7 @@
 <%@ include file="/head.jsp" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>医生工作站</title>
 </head>
 <body>
 <img alt="" src="<%=path %>/images/bg2.jpg" width="1150px" height="520px">

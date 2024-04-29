@@ -8,10 +8,11 @@
 <%@ include file="/head.jsp" %>
 <script type="text/javascript">
 var count = 0;
+var pathhere ="http://localhost:8888/hospitalsys_war_exploded";
 $(function(){
 	//待发药患者列表
 	$("#tt").datagrid({
-		url:'<%=path%>/feeinfo/selectDfyList',
+		url:pathhere+'/feeinfo/selectDfyList',
 		height:448,
 		border:false,
 		loadMsg: '正在加载信息...',
@@ -34,7 +35,7 @@ $(function(){
 			$("#age").html(row.age);
 			$("#idno").html(row.idnumber);
 			(row.diagnose==undefined)?$("#diagnose").html('无'):$("#diagnose").html(row.diagnose);
-			$.post('<%=path%>/recipeinfo/selectByFid','fid='+row.fid,function(result){
+			$.post(pathhere+'/recipeinfo/selectByFid','fid='+row.fid,function(result){
 				$("#dglist").datagrid('loadData',result)
 			})
 		}
@@ -52,7 +53,7 @@ function senddrug(){
 	if(row==null){
 		$.messager.alert('提示','您还未选择发药信息！');
 	}else{
-		$.post('<%=path%>/feeinfo/sendDrug','fid='+row.fid,function(result){
+		$.post(pathhere+'/feeinfo/sendDrug','fid='+row.fid,function(result){
 			if(result==1){
 				$.messager.alert('提示','发药成功！');
 				$("#tt").datagrid('reload');
@@ -77,7 +78,7 @@ if(!window.WebSocket){
 var ws;  
 function wsRefresh(){  
     //创建websocket对象
-    ws = new WebSocket("ws://localhost:8080/hospital/RefreshDrug/"+count);  
+    ws = new WebSocket("ws://localhost:8888/hospitalsys_war_exploded/RefreshDrug/"+count);
     //回调函数：打开WebSocket  
     ws.onopen = function(event){  
         //alert("websocket连接成功！");

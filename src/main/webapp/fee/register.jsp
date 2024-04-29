@@ -7,9 +7,10 @@
 <title>Insert title here</title>
 <%@ include file="/head.jsp" %>
 <script type="text/javascript">
+	var pathhere ="http://localhost:8888/hospitalsys_war_exploded";
 $(function(){
 	$(".easyui-datagrid").datagrid({
-		url:'<%=path%>/register/selectList',
+		url:pathhere+'/register/selectList',
 		loadMsg: '正在加载信息...',
 		height:350,
 		fitColumns: true 
@@ -19,19 +20,19 @@ $(function(){
 	}
 	//加载科室、医生
 	$('#aid').combobox({    
-	    url:"<%=path%>/admin/selectList",    
+	    url:pathhere+"/admin/selectList",
 	    valueField:'aid',    
 	    textField:'aname'
 	});
 	$('#deptid').combobox({    
-	    url:"<%=path%>/dept/selectGh",    
+	    url:pathhere+"/dept/selectGh",
 	    valueField:'deptid',    
 	    textField:'dname'
 	});  
 	$("#deptid").combobox({
 		onChange:function(){
 			$('#aid').combobox({    
-			    url:'<%=path%>/admin/selectByDept?deptid='+$('#deptid').combobox('getValue'),    
+			    url:pathhere+'/admin/selectByDept?deptid='+$('#deptid').combobox('getValue'),
 			    valueField:'aid',    
 			    textField:'aname'
 			});
@@ -46,7 +47,7 @@ $(function(){
 $(function(){
     $('#patientno').textbox('textbox').bind('keydown', function(e){
     	if (e.keyCode == 13){	// 当按下回车键时接受输入的值。
-    		$.post('<%=path%>/patientinfo/selectOne','patientno='+$('#patientno').val(),function(result){
+    		$.post(pathhere+'/patientinfo/selectOne','patientno='+$('#patientno').val(),function(result){
     			if(result!=''){
     				$("#patientno").textbox('setValue', result.patientno);
 	    			$("#idnumber").textbox('setValue', result.idnumber);
@@ -63,7 +64,7 @@ $(function(){
     
     $('#idnumber').textbox('textbox').bind('keydown', function(e){
     	if (e.keyCode == 13){	// 当按下回车键时接受输入的值。
-    		$.post('<%=path%>/patientinfo/selectByIdnumber','idnumber='+$('#idnumber').val(),function(result){
+    		$.post(pathhere+'/patientinfo/selectByIdnumber','idnumber='+$('#idnumber').val(),function(result){
     			if(result!=''){
 	    			$("#patientno").textbox('setValue', result.patientno);
 	    			$("#patientname").textbox('setValue', result.patientname);
@@ -88,19 +89,19 @@ $(function(){
 //保存挂号数据
 function insert(){
 	$("#fm").form('submit',{
-		url:'<%=path%>/register/insert',
+		url:pathhere+'/register/insert',
 		onSubmit:function(){
 			return $("#fm").form('validate');
 		},
 		success:function(result){
-			if(result==1){
+			// if(result==1){
 				$(".easyui-datagrid").datagrid("reload");
 				$("#fm").form('clear');
 				$('#dlg').dialog('close');
 				$.messager.alert('提示','挂号成功！');  
-			}else{
-				$.messager.alert('提示','挂号失败！');  
-			}
+			// }else{
+			// 	$.messager.alert('提示','挂号失败！');
+			// }
 		}
 	})
 }
@@ -139,7 +140,7 @@ function sex(value,row,index){
 <div class="place">
     <span>位置：</span>
     <ul class="placeul">
-    <li><a href="#">门诊收费</a></li>
+    <li><a href="#">门诊挂号</a></li>
     <li><a href="#">挂号管理</a></li>
     </ul>
 </div>
@@ -176,7 +177,7 @@ function sex(value,row,index){
 				</td>
 				<td colspan="2">
 				<ul class="toolbar">
-       				<li style="width: 80px" onclick="sf()"><span><img src="<%=path %>/images/t01.png"/></span>挂号</li>
+       				<li style="width: 80px" onclick="sf()"><span><img src="<%=path%>/images/t01.png"/></span>挂号</li>
        			</ul>
 				</td>
 			</tr>

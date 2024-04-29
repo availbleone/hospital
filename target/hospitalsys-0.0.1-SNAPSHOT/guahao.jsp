@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>医生工作站</title>
 <%@ include file="/head.jsp" %>
 </head>
 <frameset rows="88,*" cols="*" frameborder="no" border="0" framespacing="0">
   <frame src="top.jsp" name="topFrame" scrolling="no" noresize="noresize" id="topFrame" title="topFrame" />
-  <frame src="<%=path %>/fee/yuyue.jsp" name="rightFrame" id="rightFrame" title="rightFrame" />
+  <frame src="<%=path%>/fee/yuyue.jsp" name="rightFrame" id="rightFrame" title="rightFrame" />
 </frameset>
 <noframes><body>
 </body></noframes>

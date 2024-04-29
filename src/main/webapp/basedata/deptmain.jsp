@@ -4,16 +4,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>医生工作站</title>
 <%@ include file="/head.jsp" %>
 <script type="text/javascript">
 //加载列表
 var data = [{dtype: 1,type: '诊室'},{dtype: 2,type: '其他'}];
+var pathhere ="http://localhost:8888/hospitalsys_war_exploded";
 $(function(){
 	$('#tt').edatagrid({    
-	    url: '<%=path%>/dept/selectList',    
-	    saveUrl: '<%=path%>/dept/insert',    
-	    updateUrl: '<%=path%>/dept/update',    
+	    url: pathhere+'/dept/selectList',
+	    saveUrl: pathhere+'/dept/insert',
+	    updateUrl: pathhere+'/dept/update',
 	    loadMsg: '正在加载信息...',
 		fitColumns: true,
 		frozenColumns:[[{field:'ck',checkbox:true}]],
@@ -77,7 +78,7 @@ function deptdelete(){
 	if(row){
 		$.messager.confirm('确认','您确认想要删除记录吗？',function(r){    
 		    if (r){    
-		    	$.post("<%=path%>/dept/delete","deptid="+row.deptid,function(result){
+		    	$.post(pathhere+"/dept/delete","deptid="+row.deptid,function(result){
 		    		if(result==1){
 		    			$("#tt").datagrid("reload");
 		    			$.messager.alert('提示','操作成功！');

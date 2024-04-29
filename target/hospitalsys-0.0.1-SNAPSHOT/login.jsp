@@ -17,7 +17,7 @@
 
 <script type="text/javascript">
 function login(){
-	$.post('<%=path%>/admin/selectLogin',{'aid':$("#aid").val(),'apwd':$("#apwd").val()},function(result){
+	$.post('http://localhost:8888/hospitalsys_war_exploded/admin/selectLogin',{'aid':$("#aid").val(),'apwd':$("#apwd").val()},function(result){
 		if(result!=""){
 			sessionStorage.admin = JSON.stringify(result);
 			location='<%=path%>/index.jsp';

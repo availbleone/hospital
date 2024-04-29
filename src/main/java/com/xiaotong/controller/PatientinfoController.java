@@ -2,6 +2,7 @@ package com.xiaotong.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -10,6 +11,7 @@ import com.xiaotong.service.IPatientinfoService;
 
 @Controller
 @RequestMapping("/patientinfo")
+@CrossOrigin
 public class PatientinfoController {
 	@Autowired
 	private IPatientinfoService ips;

@@ -10,11 +10,12 @@
 //加载列表
 var roles;
 var depts;
+var pathhere ="http://localhost:8888/hospitalsys_war_exploded";
 $(function(){
-		$('#druglist').edatagrid({   
-		    url: '<%=path%>/recipeinfo/selectByProperty',    
-		    saveUrl: '<%=path%>/recipeinfo/insert',    
-		    updateUrl: '<%=path%>/recipeinfo/update',    
+		$('#druglist').edatagrid({
+		    url: pathhere+'/recipeinfo/selectByProperty',
+		    saveUrl: pathhere+'/recipeinfo/insert',
+		    updateUrl: pathhere+'/recipeinfo/update',
 		    loadMsg: '正在加载信息...',
 			fitColumns: true,
 			frozenColumns:[[{field:'ck',checkbox:true}]],
@@ -37,7 +38,7 @@ $(function(){
 	            		panelWidth:450,    
 	            	    idField:'did1',    
 	            	    textField:'dname',    
-	            	    url:'<%=path%>/clinicitem/selectXm?flag=1',    
+	            	    url:pathhere+'/clinicitem/selectXm?flag=1',
 	            	    columns:[[    
 	            	        {field:'itemid',title:'项目编号',width:100},    
 	            	        {field:'iname',title:'项目名',width:200},    

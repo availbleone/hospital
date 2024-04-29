@@ -4,15 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>医生工作站</title>
 <%@ include file="/head.jsp" %>
 <script type="text/javascript">
+    var pathhere ="http://localhost:8888/hospitalsys_war_exploded";
 //加载列表
 $(function(){
 	$('#tt').edatagrid({    
-	    url: '<%=path%>/role/selectList',    
-	    saveUrl: '<%=path%>/role/insert',    
-	    updateUrl: '<%=path%>/role/update',    
+	    url: pathhere+'/role/selectList',
+	    saveUrl: pathhere+'/role/insert',
+	    updateUrl: pathhere+'/role/update',
 	    loadMsg: '正在加载信息...',
 		fitColumns: true,
 		frozenColumns:[[{field:'ck',checkbox:true}]]
@@ -33,7 +34,7 @@ function deleterole(){
 	if(row){
 		$.messager.confirm('确认','您确认想要删除记录吗？',function(r){    
 		    if (r){    
-		    	$.post("<%=path%>/role/delete","roleid="+row.roleid,function(result){
+		    	$.post(pathhere+"/role/delete","roleid="+row.roleid,function(result){
 		    		if(result==1){
 		    			$("#tt").datagrid("reload");
 		    			$.messager.alert('提示','操作成功！');

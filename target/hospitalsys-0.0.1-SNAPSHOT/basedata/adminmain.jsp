@@ -10,15 +10,16 @@
 //加载列表
 var roles;
 var depts;
+var pathhere ="http://localhost:8888/hospitalsys_war_exploded";
 $(function(){
-	$.post('<%=path%>/dept/selectList','',function(result){
+	$.post(pathhere+'/dept/selectList','',function(result){
 		depts = result;
-		$.post('<%=path%>/role/selectList','',function(result){
+		$.post(pathhere+'/role/selectList','',function(result){
 			roles = result;
 			$('#tt').edatagrid({   
-			    url: '<%=path%>/admin/selectList',    
-			    saveUrl: '<%=path%>/admin/insert',    
-			    updateUrl: '<%=path%>/admin/update',    
+			    url: pathhere+'/admin/selectList',
+			    saveUrl: pathhere+'/admin/insert',
+			    updateUrl: pathhere+'/admin/update',
 			    loadMsg: '正在加载信息...',
 				fitColumns: true,
 				frozenColumns:[[{field:'ck',checkbox:true}]],
@@ -128,7 +129,7 @@ function admindelete(){
 	if(row){
 		$.messager.confirm('确认','您确认想要删除记录吗？',function(r){    
 		    if (r){    
-		    	$.post("<%=path%>/admin/delete","aid="+row.aid,function(result){
+		    	$.post(pathhere+"/admin/delete","aid="+row.aid,function(result){
 		    		if(result==1){
 		    			$("#dlg").dialog('close');
 		    			$("#tt").datagrid("reload");

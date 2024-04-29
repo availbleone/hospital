@@ -4,14 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>医生工作站</title>
 <%@ include file="/head.jsp" %>
 </head>
 <frameset rows="88,*" cols="*" frameborder="no" border="0" framespacing="0">
   <frame src="top.jsp" name="topFrame" scrolling="no" noresize="noresize" id="topFrame" title="topFrame" />
   <frameset cols="187,*" frameborder="no" border="0" framespacing="0">
     <frame src="left.jsp" name="leftFrame" scrolling="no" noresize="noresize" id="leftFrame" title="leftFrame" />
-    <frame src="<%=path %>/default.html" name="rightFrame" id="rightFrame" title="rightFrame" />
+    <frame src="<%=path%>/default.html" name="rightFrame" id="rightFrame" title="rightFrame" />
   </frameset>
 </frameset>
 <noframes><body>

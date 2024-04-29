@@ -7,11 +7,12 @@
 <title>Insert title here</title>
 <%@ include file="/head.jsp" %>
 <script type="text/javascript">
+    var pathhere ="http://localhost:8888/hospitalsys_war_exploded";
 $(function(){
 	$('#tt').edatagrid({    
-	    url: '<%=path%>/druginfo/selectList',    
-	    saveUrl: '<%=path%>/druginfo/insert',    
-	    updateUrl: '<%=path%>/druginfo/update',
+	    url: pathhere+'/druginfo/selectList',
+	    saveUrl: pathhere+'/druginfo/insert',
+	    updateUrl: pathhere+'/druginfo/update',
 	    loadMsg: '正在加载信息...',
 		fitColumns: true,
 		frozenColumns:[[{field:'ck',checkbox:true}]],
@@ -146,7 +147,7 @@ function deletedrug(){
 	if(row){
 		$.messager.confirm('确认','您确认想要删除记录吗？',function(r){    
 		    if (r){    
-		    	$.post("<%=path%>/druginfo/delete","did="+row.did,function(result){
+		    	$.post(pathhere+"/druginfo/delete","did="+row.did,function(result){
 		    		if(result==1){
 		    			$("#dlg").dialog('close');
 		    			$("#tt").datagrid("reload");

@@ -1,18 +1,19 @@
-var aid = JSON.parse(sessionStorage.admin).aid;
+aid = JSON.parse(sessionStorage.admin).aid;
 var obj;
 var currentindex = -1;
-$(function(){
+var pathhere ="http://localhost:8888/hospitalsys_war_exploded";
+window.onload=function(){
 	$("#key").val(1);
 	$("#operatorid").val(aid);
 	//患者列表加载
 	$('#tt').datagrid({    
-	    url: '/hospital/register/selectDz?aid='+aid,    
+	    url: pathhere+'/register/selectDz?aid='+aid,
 	    loadMsg: '正在加载信息...',
 		fitColumns: true,
 		height:448,
 		border:false,
 		frozenColumns:[[{field:'ck',checkbox:true}]],
-		onloadsuccess:function(){
+		onLoadSuccess:function(){
 			if(currentindex!=-1){  //有选中行时加载数据后设置选中行   
                 $('#tt').datagrid('selectRow',currentindex);        
            }else{
@@ -38,11 +39,11 @@ $(function(){
 			
 		}
 	});
-});
+};
 //检查项目列表
 function sxlb(){
 	$('#jclist').datagrid({
-		url: '/hospital/recipeinfo/selectByProperty',    
+		url: pathhere+'/recipeinfo/selectByProperty',
 	    loadMsg: '正在加载信息...',
 		fitColumns: true,
 		frozenColumns:[[{field:'ck',checkbox:true}]],
@@ -64,7 +65,7 @@ function deletexm(){
 		$.messager.confirm('确认','您确认想要删除记录吗？',function(r){    
 		    if (r){  
 		    	if(row.sfstate!=1){
-		    		$.post("/hospital/recipeinfo/deletexm","rid="+row.rid+"&fid="+row.fid,function(result){
+		    		$.post(pathhere+"/recipeinfo/deletexm","rid="+row.rid+"&fid="+row.fid,function(result){
 			    		if(result==1){
 			    			$("#dlg").dialog('close');
 			    			$("#jclist").datagrid("reload");
@@ -89,7 +90,7 @@ function transsex(value,row,index){
 //清屏
 function cleara(){
 	$("#fm").form('clear');
-	var row = $("#tt").datagrid("getSelected");
+	row = $("#tt").datagrid("getSelected");
 	$("#patientno").val(row.patientno);
 	$("#patientname").val(row.patientname);
 	$("#regid").val(row.regid);
@@ -102,10 +103,11 @@ function save(flag){
 	//alert(flag);
 	var url;
 	if(flag==1){
-		url = '/hospital/record/insert';
+		url = pathhere+'/record/insert';
+
 	}
 	if(flag==2){
-		url = '/hospital/recipeinfo/insert';
+		url = pathhere+'/recipeinfo/insert';
 	}
 	$("#fm").form('submit',{
 		url:url,
@@ -129,7 +131,7 @@ function xmlist(type){
 	    panelWidth:450,    
 	    idField:'did1',    
 	    textField:'dname',    
-	    url:'/hospital/clinicitem/selectXm?flag='+type,    
+	    url:pathhere+'/clinicitem/selectXm?flag='+type,
 	    columns:[[    
 	        {field:'itemid',title:'项目编号',width:100},    
 	        {field:'iname',title:'项目名',width:200},    
@@ -154,38 +156,17 @@ function xmlist(type){
 
 }
 //Tab页切换
-function changejcjy(type){
-	var row = $("#tt").datagrid('getSelected');
-	if(row==null){
-		$.messager.alert('提示','您还未选择患者！');
-	}
-	if(type==2){
-		$("#bzsm1").html('检验样本');
-		$("#key").val(2)
-		sxlb();
-		xmlist(type);
-	}
-	if(type==1){
-		$("#bzsm1").html('检查部位');
-		$("#key").val(1)
-		sxlb();
-		xmlist(type);
-	}
-	if(type==3){
-		$("#key").val(3)
-		scdl();
-	}else{
-		schistory();
-	}
-}
+
+
+
 //加载药品列表
 var roles;
 var depts;
 function scdl(){
 	$('#druglist').edatagrid({   
-	    url: '/hospital/recipeinfo/selectByProperty',    
-	    saveUrl: '/hospital/recipeinfo/insert',    
-	    updateUrl: '/hospital/recipeinfo/update',    
+	    url: pathhere+'/recipeinfo/selectByProperty',
+	    saveUrl: pathhere+'/recipeinfo/insert',
+	    updateUrl: pathhere+'/recipeinfo/update',
 	    loadMsg: '正在加载信息...',
 		//fitColumns: true,
 		frozenColumns:[[{field:'ck',checkbox:true}]],
@@ -209,7 +190,7 @@ function scdl(){
             		panelWidth:650,    
             	    idField:'did1',    
             	    textField:'dname',    
-            	    url:'/hospital/druginfo/selectYp',    
+            	    url:pathhere+'/druginfo/selectYp',
             	    columns:[[    
             	        {field:'did',title:'药品编号',width:70},    
             	        {field:'dname',title:'药品名',width:150},    
@@ -365,7 +346,7 @@ function deleteyp(){
 		$.messager.confirm('确认','您确认想要删除记录吗？',function(r){    
 		    if (r){  
 		    	if(row.sfstate!=1){
-		    		$.post("/hospital/recipeinfo/deletexm","rid="+row.rid+"&fid="+row.fid,function(result){
+		    		$.post(pathhere+"/recipeinfo/deletexm","rid="+row.rid+"&fid="+row.fid,function(result){
 			    		if(result==1){
 			    			$("#dlg").dialog('close');
 			    			$("#druglist").datagrid("reload");
@@ -386,7 +367,7 @@ function deleteyp(){
 //生成历史病历列表
 function schistory(){
 	$("#historylist").datagrid({
-		url:'/hospital/record/selectByPno?pno='+obj.patientno,
+		url:pathhere+'/record/selectByPno?pno='+obj.patientno,
 		title:'历史处方',
 		border:false,
 		height:448,
@@ -411,7 +392,7 @@ function schistory(){
 			},
 			onExpandRow:function(index,row){
 				$("#ddv-"+index).datagrid({
-				url:'/hospital/recipeinfo/selectByRegid?regid='+row.regid,
+				url:pathhere+'/recipeinfo/selectByRegid?regid='+row.regid,
 				width:600,
 				height:"auto",
 				columns:[[
@@ -439,7 +420,7 @@ function schistory(){
 //诊毕功能
 function closeover(){
 	if(obj){
-		$.post('/hospital/register/updateState','regid='+obj.regid,function(result){
+		$.post(pathhere+'/register/updateState','regid='+obj.regid,function(result){
 			if(result==1){
 				$.messager.alert('提示','操作成功！');
 				currentindex = -1;

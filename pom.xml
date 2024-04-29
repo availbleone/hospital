@@ -34,11 +34,6 @@
 			<version>3.8.1</version>
 		</dependency>
 		<!-- oracle 数据库 -->
-		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc6</artifactId>
-			<version>11.2.0.1.0</version>
-		</dependency>
 		<!-- tomcat 的支持 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

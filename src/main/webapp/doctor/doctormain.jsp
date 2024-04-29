@@ -4,11 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>医生工作站</title>
 <%@ include file="/head.jsp" %>
-<script type="text/javascript" src="<%=path %>/js/jquery.idTabs.min.js"></script>
-<script type="text/javascript" src="<%=path %>/js/select-ui.min.js"></script>
-<script type="text/javascript" src="<%=path %>/js/recipeinfo.js"></script>
+<script type="text/javascript" src="<%=path%>/js/jquery.idTabs.min.js"></script>
+<script type="text/javascript" src="<%=path%>/js/select-ui.min.js"></script>
+<script type="text/javascript" src="<%=path%>/js/recipeinfo.js"></script>
+<script type="text/javascript" src="<%=path%>/js/recipeinfo.js"></script>
 </head>
 <body>
 
@@ -36,11 +37,11 @@
 	<div id="usual1" class="usual"> 
 	    <div class="itab">
 		  	<ul> 
-		    <li><a href="#tab1" class="selected">门诊病历</a></li> 
-		    <li><a href="#tab2" onclick="changejcjy(3)">开立处方</a></li> 
-		    <li><a href="#tab3" onclick="changejcjy(1)">检查申请单</a></li> 
-		    <li><a href="#tab3" onclick="changejcjy(2)">检验申请单</a></li> 
-		    <li><a href="#tab5" onclick="changejcjy(4)">历史处方</a></li> 
+		    <li><a href="#tab1" class="selected">门诊病历</a></li>
+		    <li><a href="#tab2" onclick="changejcjy(3)">开立处方</a></li>
+		    <li><a href="#tab3" onclick="changejcjy(1)">检查申请单</a></li>
+		    <li><a href="#tab3" onclick="changejcjy(2)">检验申请单</a></li>
+		    <li><a href="#tab5" onclick="changejcjy(4)">历史处方</a></li>
 		  	</ul>
 	    </div> 
 	    <!--------------------------------- 门诊病历 begin ------------------------------------------->
@@ -51,10 +52,10 @@
 			    <li>
 			    	<label>体温</label><input name="temperature" id="temperature" type="text" class="dfinput" style="width: 70px;" />&nbsp;&nbsp;℃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			    	血压&nbsp;&nbsp;
-			    	<input name="bloodpre" id="bloodpre" type="text" class="dfinput" style="width: 80px;" />
+			    	<input name="bloodpre" id="bloodpre" type="text" class="dfinput" style="width: 80px;"/>
 			    </li>
 			    <li><label>诊断</label><input name="diagnose" id="diagnose" type="text" class="dfinput" /></li>
-			    <li><label>门诊处置</label><textarea id="measure" name="measure" cols="" rows="" class="textinput"></textarea></li>
+			    <li><label>门诊处置</label><textarea id="measure" name="measure" cols="" rows="" s="" class="textinput"></textarea></li>
 			    <li>
 			    	<label>&nbsp;</label>
 			    	<input type="button" class="btn" value="确认保存" onclick="save(1)"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -74,10 +75,10 @@
 	  	<div id="tab2" class="tabson" style="height: 450px">
 		    <div class="tools" style="margin-top: 10px">
 		    	<ul class="toolbar">
-			        <li onclick="insert()"><span><img src="<%=path %>/images/t01.png" /></span>添加</li>
-			        <li onclick="savedrug()"><span><img src="<%=path %>/images/ico04.png" /></span>保存</li>
-			        <li onclick="deleteyp()"><span><img src="<%=path %>/images/t03.png" /></span>删除</li>
-			        <li onclick="canceledit()"><span><img src="<%=path %>/images/undo.png" /></span>取消</li>
+			        <li onclick="insert()"><span><img src="<%=path%>/images/t01.png" /></span>添加</li>
+			        <li onclick="savedrug()"><span><img src="<%=path%>/images/ico04.png" /></span>保存</li>
+			        <li onclick="deleteyp()"><span><img src="<%=path%>/images/t03.png" /></span>删除</li>
+			        <li onclick="canceledit()"><span><img src="<%=path%>/images/undo.png" /></span>取消</li>
 		        </ul>
 	    	</div>
 		    <table id="druglist" title="项目列表" singleSelect="true"></table>
@@ -164,6 +165,31 @@
 	$('.tablelist tbody tr:odd').addClass('odd');
 </script>
 </div>
-
 </body>
+<script type="text/javascript">
+	function changejcjy(type){
+		row = $("#tt").datagrid('getSelected');
+		if(row==null){
+			$.messager.alert('提示','您还未选择患者!');
+		}
+		if(type==2){
+			$("#bzsm1").html('检验样本');
+			$("#key").val(2)
+			sxlb();
+			xmlist(type);
+		}
+		if(type==1){
+			$("#bzsm1").html('检查部位');
+			$("#key").val(1)
+			sxlb();
+			xmlist(type);
+		}
+		if(type==3){
+			$("#key").val(3)
+			scdl();
+		}else{
+			schistory();
+		}
+	}
+</script>
 </html>

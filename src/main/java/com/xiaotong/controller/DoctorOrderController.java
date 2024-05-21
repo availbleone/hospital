@@ -1,10 +1,7 @@
 package com.xiaotong.controller;
 
-import com.xiaotong.model.Admin;
 import com.xiaotong.model.DoctorOrder;
-import com.xiaotong.service.DoctorOrderService;
-import com.xiaotong.service.IAdminService;
-import com.xiaotong.util.MD5util;
+import com.xiaotong.service.IDoctorOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -18,17 +15,27 @@ import java.util.Map;
 @RequestMapping("/nurse")
 public class DoctorOrderController {
 	@Autowired
-	private DoctorOrderService doctorOrderService;
+	private IDoctorOrderService IDoctorOrderService;
 
-	@GetMapping("/doctorOrders")
-	public List<DoctorOrder> getAllOrders() {
-		return doctorOrderService.getAllOrders();
+	@RequestMapping( "/doctorOrders")
+	@ResponseBody
+	public List<DoctorOrder> getDoctorOrders() {
+		System.out.println("Fetched Orders: 1111111111111111111111111111111111111111");
+		List<DoctorOrder> orders = IDoctorOrderService.getAllOrders();
+		System.out.println("Fetched Orders: 1111111111111111111111111111111111111111" + orders); // 打印查询结果
+		return orders;
 	}
-	@PostMapping("/executeOrder")
+	@PostMapping("/doctorOrders")
+	@ResponseBody
+	public List<DoctorOrder> postDoctorOrders() {
+		return IDoctorOrderService.getAllOrders();
+	}
+	@RequestMapping( "/executeOrder")
+	@ResponseBody
 	public Map<String, Object> executeOrder(@RequestParam("id") int id) {
 		Map<String, Object> result = new HashMap<>();
 		try {
-			doctorOrderService.executeOrder(id);
+			IDoctorOrderService.executeOrder(id);
 			result.put("success", true);
 		} catch (Exception e) {
 			result.put("success", false);
@@ -36,16 +43,17 @@ public class DoctorOrderController {
 		}
 		return result;
 	}
-	@PostMapping("/deleteOrder")
-	public Map<String, Object> deleteOrder(@RequestParam("id") int id) {
-		Map<String, Object> result = new HashMap<>();
+	@RequestMapping( "/deleteOrder")
+	@ResponseBody
+	public Map<String, Object> deleteOrder(@RequestBody Map<String, Integer> request) {
+		int id = request.get("id");
+		Map<String, Object> response = new HashMap<>();
 		try {
-			doctorOrderService.deleteOrder(id);
-			result.put("success", true);
+			IDoctorOrderService.deleteOrder(id);
+			response.put("success", true);
 		} catch (Exception e) {
-			result.put("success", false);
-			result.put("errorMsg", e.getMessage());
+			response.put("success", false);
 		}
-		return result;
+		return response;
 	}
 }

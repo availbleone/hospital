@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaotong.dao.IDoctorOrderDao">
+	<resultMap id="DoctorOrderResultMap" type="com.xiaotong.model.DoctorOrder">
+		<id column="ID" property="id" />
+		<result column="PATIENT_NAME" property="patientName" />
+		<result column="DOCTOR_NAME" property="doctorName" />
+		<result column="MEDICATION_INFO" property="medicationInfo" />
+		<result column="ORDER_TIME" property="orderTime" />
+		<result column="ORDER_INFO" property="orderInfo" />
+	</resultMap>
+
+	<select id="getAllOrders" resultMap="DoctorOrderResultMap">
+		SELECT ID, PATIENT_NAME, DOCTOR_NAME, MEDICATION_INFO, ORDER_TIME, ORDER_INFO
+		FROM doctor_orders
+	</select>
+
+	<delete id="deleteOrder">
+		DELETE FROM doctor_orders WHERE id = #{id}
+	</delete>
+	<update id="executeOrder">
+		UPDATE doctor_orders SET status = 'executed' WHERE id = #{id}
+	</update>
+</mapper>

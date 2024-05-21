@@ -62,30 +62,28 @@
 
                     <!-------------------------------床位页面 end  -------------------------->
                     <div id="tab3" class="tabson" style="height: 450px">
-
-                        <div>
-                            <h1>医嘱管理</h1>
-                            <div style="margin-bottom:20px">
-                                <a href="#" class="easyui-linkbutton" onclick="executeOrders()">执行</a>
-                                <a href="#" class="easyui-linkbutton" onclick="deleteOrders()">删除</a>
-                            </div>
-                            <table id="doctorOrders" class="easyui-datagrid" style="width:700px;height:400px"
-                                   url="/doctorOrders" toolbar="#toolbar" pagination="true"
-                                   rownumbers="true" fitColumns="true" singleSelect="true">
-                                <thead>
-                                <tr>
-                                    <th field="id" checkbox="true"></th>
-                                    <th field="patientName">病人姓名</th>
-                                    <th field="doctorName">医生姓名</th>
-                                    <th field="medicationInfo">药物信息</th>
-                                    <th field="orderTime">时间</th>
-                                    <th field="orderInfo">医嘱信息</th>
-                                </tr>
-                                </thead>
-                            </table>
+                    <div>
+                        <h1>医嘱管理</h1>
+                        <div style="margin-bottom:20px">
+                            <a href="#" class="easyui-linkbutton" onclick="executeOrders()">执行</a>
+                            <a href="#" class="easyui-linkbutton" onclick="deleteOrders()">删除</a>
                         </div>
-
+                        <table id="doctorOrders" class="easyui-datagrid" style="width:700px;height:400px"
+                               url="http://localhost:8888/hospitalsys_war_exploded/nurse/doctorOrders" toolbar="#toolbar" pagination="true"
+                               rownumbers="true" fitColumns="true" singleSelect="true">
+                            <thead>
+                            <tr>
+                                <th field="id" checkbox="true"></th>
+                                <th field="patientName">病人姓名</th>
+                                <th field="doctorName">医生姓名</th>
+                                <th field="medicationInfo">药物信息</th>
+                                <th field="orderTime">时间</th>
+                                <th field="orderInfo">医嘱信息</th>
+                            </tr>
+                            </thead>
+                        </table>
                     </div>
+                </div>
                     <!--------------------------------- 医嘱end ------------------------------------------->
 
                 </div>
@@ -100,37 +98,61 @@
     </script>
 </div>
 </body>
-    <script type="text/javascript">
-        function executeOrders() {
+<script type="text/javascript">
+    $(function(){
+        $('#doctorOrders').datagrid({
+            url: '/nurse/doctorOrders', // Ensure this uses GET method by default
+            method: 'get', // Specify the request method
+            columns: [[
+                {field: 'id', checkbox: true},
+                {field: 'patientName', title: '病人姓名'},
+                {field: 'doctorName', title: '医生姓名'},
+                {field: 'medicationInfo', title: '药物信息'},
+                {field: 'orderTime', title: '时间'},
+                {field: 'orderInfo', title: '医嘱信息'}
+            ]],
+            pagination: true,
+            rownumbers: true,
+            singleSelect: true
+        });
+    });
+
+    function executeOrders() {
         var row = $('#doctorOrders').datagrid('getSelected');
         if (row) {
-        $.post('/executeOrder', {id: row.id}, function(result) {
-        if (result.success) {
-        $('#doctorOrders').datagrid('reload');    // reload the user data
-    } else {
-        $.messager.show({    // show error message
-        title: 'Error',
-        msg: result.errorMsg
-    });
-    }
-    }, 'json');
-    }
+            $.post('http://localhost:8888/hospitalsys_war_exploded/nurse/executeOrder', { id: row.id }, function(result) {
+                if (result.success) {
+                    $('#doctorOrders').datagrid('reload'); // Reload data
+                } else {
+                    alert('执行失败');
+                }
+            }, 'json');
+        } else {
+            alert('请选择一条记录');
+        }
     }
 
-        function deleteOrders() {
+    function deleteOrders() {
         var row = $('#doctorOrders').datagrid('getSelected');
         if (row) {
-        $.post('/deleteOrder', {id: row.id}, function(result) {
-        if (result.success) {
-        $('#doctorOrders').datagrid('reload');    // reload the user data
-    } else {
-        $.messager.show({    // show error message
-        title: 'Error',
-        msg: result.errorMsg
-    });
-    }
-    }, 'json');
-    }
+            if (confirm('确定要删除这条记录吗？')) {
+                $.ajax({
+                    url: 'http://localhost:8888/hospitalsys_war_exploded/nurse/deleteOrder',
+                    type: 'POST',
+                    data: JSON.stringify({ id: row.id }),
+                    contentType: 'application/json',
+                    success: function(result) {
+                        if (result.success) {
+                            $('#doctorOrders').datagrid('reload'); // Reload data
+                        } else {
+                            alert('删除失败');
+                        }
+                    }
+                });
+            }
+        } else {
+            alert('请选择一条记录');
+        }
     }
 </script>
 

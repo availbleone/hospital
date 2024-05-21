@@ -3,13 +3,24 @@ package com.xiaotong.model;
 import java.util.Date;
 
 public class DoctorOrder {
+	@Override
+	public String toString() {
+		return "DoctorOrder{" +
+				"id=" + id +
+				", patientName='" + patientName + '\'' +
+				", doctorName='" + doctorName + '\'' +
+				", medicationInfo='" + medicationInfo + '\'' +
+				", orderTime=" + orderTime +
+				", orderInfo='" + orderInfo + '\'' +
+				'}';
+	}
+
 	private int id;
 	private String patientName;
 	private String doctorName;
 	private String medicationInfo;
 	private Date orderTime;
 	private String orderInfo;
-
 	// 构造函数、getter 和 setter 方法省略
 
 	// Getter 和 Setter 方法

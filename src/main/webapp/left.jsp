@@ -47,6 +47,11 @@ $(function(){
                 <li><cite></cite><a href="<%=path %>/doctor/doctormain.jsp" target="rightFrame">医生工作站</a><i></i></li>
             </ul>
         </dd>
+        <dd><div class="title"><span><img src="images/leftico03.png" /></span>护士工作站</div>
+            <ul class="menuson">
+                <li><cite></cite><a href="<%=path %>/nurse/nursemain.jsp" target="rightFrame">护士工作站</a><i></i></li>
+            </ul>
+        </dd>
         <dd>
     <div class="title">
     <span><img src="images/leftico02.png" /></span>门诊管理</div>
